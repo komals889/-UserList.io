@@ -60,7 +60,7 @@ export default function Index({ history }) {
     e.preventDefault()
     const fd = new FormData()
     fd.append("avatar", selectfile);
-    fd.append("username", updateUsername);
+    fd.append("userName", updateUsername);
     fd.append("email", updateEmail);
     fd.append("password", updatePassword);
     await dispatch(updateDataAction(updateId, fd))
@@ -124,9 +124,9 @@ useEffect(() => {
                           </div>
                           <div className="card-body " style={{objectFit:"contain"}}>
                           <img src={"http://localhost:5000/" + item.pic} alt="" className='img-fluid'/>
-                            <p> UserName : <strong>{item.heading}</strong> </p>
-                            <p> Email : <strong>{item.desc}</strong></p>
-                            <p> Password : <strong>{item.price}</strong></p>
+                            <p> UserName : <strong>{item.userName}</strong> </p>
+                            <p> Email : <strong>{item.email}</strong></p>
+                            <p> Password : <strong>{item.password}</strong></p>
                             <button className='btn btn-outline-danger ' data-bs-target="#delete" data-bs-toggle="modal" onClick={(e) =>  {
                                 deleteId =item._id
                             }}><i class="bi bi-trash-fill"></i></button>
@@ -158,8 +158,8 @@ useEffect(() => {
               </div>
               <div className="card-header">
               <div className="row">
-   {
-     isloading
+            {
+              isloading
                 ? <div className='spinner spinner-border text-black '></div>
                 : findPostData.length > 0
               ?findPostData.map((item) => (
@@ -181,15 +181,14 @@ useEffect(() => {
                 </div>
                 </div>
               ))
-                  :<h1 className='text-center'>NO Data found</h1>
-                
-   }
-    </div>
+                  :<h1 className='text-center'>NO Data found</h1>                
+            }
+          </div>
         </div>
-              </div>
-          </div>  
-    </div> 
-        }
+      </div>
+    </div>  
+        </div> 
+}
         
       <div className="modal fade " id="upload" >
         <div className="modal-dialog modal-dialog-centered">
@@ -205,9 +204,9 @@ useEffect(() => {
               <label htmlFor="">User Name</label><br />
               <input type="text" placeholder='enter userName'  onChange={e=> setuserName(e.target.value)} className='form-control' required/><br />
               <label htmlFor="">Email</label><br />
-             <input type="email" name="" id="" cols="20" rows="05" onChange={e=> setemail(e.target.value)} className='form-control' required placeholder='Enter Description'></input> <br />
+             <input type="email" name="" id="" cols="20" rows="05" onChange={e=> setemail(e.target.value)} className='form-control' required placeholder='Enter Email'></input> <br />
               <label htmlFor="">Password</label> <br />
-                <input type="password" placeholder='Enter Price' onChange={e => setpassword(e.target.value)} className='form-control' required /><br />
+                <input type="password" placeholder='Enter Password' onChange={e => setpassword(e.target.value)} className='form-control' required /><br />
                 <input type="file" className='form-control' accept='image/jpg, image/png' required onChange={handlePic} /> <br />
                 {
                   preview ?<div className='text-center'>
